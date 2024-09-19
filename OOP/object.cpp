@@ -89,15 +89,30 @@ public:
 	// 생성자
 	// 부모 클래스의 메서드에서만 privateVar 접근 가능
 	Base() : privateVar(10), protectedVar(20), publicVar(30) {}
-	void showVar() {
+	// 부모 클래스에서 virtual 키워드를 사용하여 자식 클래스에서 오버라이딩 가능한 메서드
+	virtual void showVar() {
 		cout << "privateVar: " << privateVar << ", protectedVar: " << protectedVar << ", publicVar: " << publicVar << endl;
+	}
+
+	// 오버로딩	: 같은 이름의 메서드를 여러 개 정의
+	// 매개변수의 개수나 유형이 다르면 같은 이름의 메서드를 여러 개 정의할 수 있음
+	void print(int x) {
+		cout << "int: " << x << endl;
+	}
+	void print(double x) {
+		cout << "double: " << x << endl;
+	}
+	void print(int x, double y) {
+		cout << "int: " << x << ", double: " << y << endl;
 	}
 };
 
 // Derived class (자식 클래스)
 class Derived : public Base {
 public:
-	void showVar() {
+	// 부모의 showVar() 메서드를 오버라이딩
+	// 오버라이딩: 부모 클래스의 메서드를 자식 클래스에서 재정의
+	void showVar() override {
 		// privateVar은 Base 클래스의 private 변수이므로 접근 불가
 		// cout << "privateVar: " << privateVar << ", "; // 오류 발생
 		// protectedVar은 Base 클래스의 protected 변수이므로 접근 가능
@@ -156,11 +171,28 @@ void inheritanceExample() {
 	// dpr.publicVar; // private 상속으로 접근 불가
 }
 
+// 오버로딩과 오버라이딩 실습
+void overloadOverrideExample() {
+	cout << "-- 오버로딩과 오버라이딩 --" << endl;
+	Base b;
+	cout << "오버로딩" << endl;
+	b.print(10); // int: 10
+	b.print(3.14); // double: 3.14
+	b.print(10, 3.14); // int: 10, double: 3.14
+
+	cout << "오버라이딩" << endl;
+	Derived d;
+	d.showVar(); // protectedVar: 20, publicVar: 30
+}
+
 int main() {
 	// 객체 생성 및 소멸
 	// objectExample();
 	// 상속과 접근 한정자
-	inheritanceExample();
+	// inheritanceExample();
+
+	// 오버로딩과 오버라이딩
+	overloadOverrideExample();
 	cout << "main() 함수 종료" << endl;
 	return 0;
 }
