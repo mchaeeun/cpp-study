@@ -75,3 +75,92 @@ void objectExample() {
 	// 2. 객체 소멸
 	// 객체가 소멸될 때 자동으로 소멸자가 호출되어 동적 메모리를 해제
 }
+
+// 상속과 접근 한정자 실습
+// Base class (부모 클래스)
+class Base {
+private:
+	int privateVar; // private: Base 클래스 내부에서만 접근 가능
+protected:
+	int protectedVar; // protected: Base 클래스와 자식 클래스에서 접근 가능
+public:
+	int publicVar; // public: 어디서든 접근 가능
+
+	// 생성자
+	// 부모 클래스의 메서드에서만 privateVar 접근 가능
+	Base() : privateVar(10), protectedVar(20), publicVar(30) {}
+	void showVar() {
+		cout << "privateVar: " << privateVar << ", protectedVar: " << protectedVar << ", publicVar: " << publicVar << endl;
+	}
+};
+
+// Derived class (자식 클래스)
+class Derived : public Base {
+public:
+	void showVar() {
+		// privateVar은 Base 클래스의 private 변수이므로 접근 불가
+		// cout << "privateVar: " << privateVar << ", "; // 오류 발생
+		// protectedVar은 Base 클래스의 protected 변수이므로 접근 가능
+		cout << "protectedVar: " << protectedVar << ", publicVar: " << publicVar << endl;
+	}
+};
+
+// 자식 클래스 - protected 상속
+class DerivedProtected : protected Base {
+public:
+	// protected로 상속받으면 public 멤버도 protected처럼 동작
+	void showVar() {
+		// privateVar은 접근 불가
+		// cout << "privateVar: " << privateVar << ", "; // 오류 발생
+		cout << "protectedVar: " << protectedVar << ", publicVar: " << publicVar << endl;
+	}
+};
+
+// 자식 클래스 - private 상속
+class DerivedPrivate : private Base {
+public:
+	// private로 상속받으면 public, protected 멤버 private처럼 동작
+	void showVar() {
+		// privateVar은 접근 불가
+		// cout << "privateVar: " << privateVar << ", "; // 오류 발생
+		cout << "protectedVar: " << protectedVar << ", publicVar: " << publicVar << endl;
+	}
+};
+
+void inheritanceExample() {
+	cout << "-- 상속과 접근 한정자 --" << endl;
+	// 기본	클래스 객체 생성
+	Base b;
+	cout << "Base 클래스의 멤버 변수 출력" << endl;
+	b.showVar();
+	cout << b.publicVar << endl; // public 멤버는 어디서든 접근 가능
+	// b.protectedVar = 20; // protected 멤버는 Base 클래스 외부에서 접근 불가
+	// b.privateVar = 10; // private 멤버는 Base 클래스 외부에서 접근 불가
+
+	// 자식 클래스 객체 생성
+	Derived d;
+	cout << "Derived 클래스의 멤버 변수 출력" << endl;
+	d.showVar();
+	cout << d.publicVar << endl; // public 멤버는 어디서든 접근 가능
+
+	// protected 상속
+	DerivedProtected dp;
+	cout << "DerivedProtected 클래스의 멤버 변수 출력" << endl;
+	dp.showVar();
+	// dp.publicVar; // protected 상속으로 접근 불가
+
+	// private 상속
+	DerivedPrivate dpr;
+	cout << "DerivedPrivate 클래스의 멤버 변수 출력" << endl;
+	dpr.showVar();
+	// dpr.publicVar; // private 상속으로 접근 불가
+}
+
+int main() {
+	// 객체 생성 및 소멸
+	// objectExample();
+	// 상속과 접근 한정자
+	inheritanceExample();
+	cout << "main() 함수 종료" << endl;
+	return 0;
+}
