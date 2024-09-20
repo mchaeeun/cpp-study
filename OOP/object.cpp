@@ -132,6 +132,7 @@ public:
 };
 
 // 자식 클래스 - private 상속
+// class DerivedPrivate : Base {}; // 명시되지 않으면 기본적으로 private 상속
 class DerivedPrivate : private Base {
 public:
 	// private로 상속받으면 public, protected 멤버 private처럼 동작
@@ -185,6 +186,66 @@ void overloadOverrideExample() {
 	d.showVar(); // protectedVar: 20, publicVar: 30
 }
 
+// virtual과 override 키워드 실습
+class VBase {
+public:
+	// virtual는 런타임에 동적 바인딩을 사용하여 오버라이딩된 함수를 호출
+	virtual void show() {
+		cout << "VBase show()" << endl;
+	}
+};
+
+class VDerived : public VBase {
+public:
+	void show() override {
+		cout << "VDerived show()" << endl;
+	}
+};
+
+class VDerived2 : public VBase {
+public:
+	void show() {
+		cout << "VDerived2 show()" << endl;
+	}
+};
+
+class NoVBase {
+public:
+	// virtual 키워드가 없으면 정적 바인딩을 사용하여 함수 호출
+	void show() {
+		cout << "NoVBase show()" << endl;
+	}
+};
+
+class NoVDerived : public NoVBase {
+public:
+	// override 키워드는 virtual 함수에만 사용 가능
+	// void show() override {}; // 오류 발생
+	void show() { // virtual 키워드가 없으면 오버라이딩이 아닌 새로운 함수로 인식
+		cout << "NoVDerived show()" << endl;
+	}
+};
+
+void virtualOverrideExample() {
+	cout << "-- virtual과 override 키워드 --" << endl;
+	VBase b;
+	VDerived d;
+	VDerived2 d2;
+
+	b.show(); // VBase show()
+	d.show(); // VDerived show()
+	d2.show(); // VDerived2 show()
+
+	VBase* ptr = &b;
+	ptr->show(); // VBase show()
+
+	ptr = &d;
+	ptr->show(); // VDerived show()
+
+	ptr = &d2;
+	ptr->show(); // VDerived2 show()
+}
+
 int main() {
 	// 객체 생성 및 소멸
 	// objectExample();
@@ -192,7 +253,11 @@ int main() {
 	// inheritanceExample();
 
 	// 오버로딩과 오버라이딩
-	overloadOverrideExample();
+	// overloadOverrideExample();
+
+	// virtual과 override 키워드
+	virtualOverrideExample();
+
 	cout << "main() 함수 종료" << endl;
 	return 0;
 }
