@@ -1,6 +1,7 @@
 #include "pointer.h"
 #include "structure.h"
 #include "raii.h"
+#include "smartpointer.h"
 
 int main() {
 	// 포인터 기본 개념
@@ -14,5 +15,9 @@ int main() {
 	// basicStructure();
 
 	// RAII
-	raiiExample();
+	// raiiExample();
+
+	// 스마트 포인터
+	uniquePointerExample();
+	sharedPointerExample();
 }
