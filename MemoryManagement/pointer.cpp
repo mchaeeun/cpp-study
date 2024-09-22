@@ -33,11 +33,12 @@ void pointerWarnings() {
 	// 초기화한 포인터
 	int* initializedPtr = nullptr; // 초기화되어 쓰레기 값이 들어가지 않음
 	cout << initializedPtr << endl; // 0
+	// cout << *initializedPtr << endl; // nullptr 역참조 - ! 강제 종료
 
 	// 2. Dangling Pointer: 해제된 메모리 접근
 	int* deletedPtr = new int;
 	delete deletedPtr;
-	cout << "*deletedPtr: " << *deletedPtr << endl; // 강제종료: 해제된 메모리 접근
+	// cout << "*deletedPtr: " << *deletedPtr << endl; // 강제종료: 해제된 메모리 접근
 
 	// 3. 메모리 누수(Memory Leak): 동적 메모리 해제하지 않음
 	int* memoryLeakPtr = new int; // 쓰레기 값이 들어갈 수 있음
@@ -157,4 +158,18 @@ void typeofPointer() {
 	cout << "classPtr->getX(): " << classPtr->getX() << endl;
 	cout << "(*classPtr).getX(): " << (*classPtr).getX() << endl; // 역참조 연산자 사용
 	delete classPtr; // classPtr이 가르키는 객체 메모리 해제
+
+	// 11. 참조자(Reference): 포인터와 유사한 개념
+	int f = 6;
+	int g = 7;
+	int& ref = f; // int형 변수 f를 참조하는 참조자 ref 선언
+	cout << "f: " << f << ", ref: " << ref << endl;
+	ref = 7; // ref가 가르키는 변수 f의 값 변경
+	cout << "f: " << f << ", ref: " << ref << endl;
+	f = 8; // f의 값 변경
+	cout << "f: " << f << ", ref: " << ref << endl;
+	// 참조자는 한 번 선언되면 다른 변수를 참조할 수 없음
+	ref = g; // ref이 g를 참조하도록 변경하는 게 아니라 ref가 가르키는 변수 값을 g로 변경
+	g = 9; // g의 값 변경
+	cout << "f: " << f << ", ref: " << ref << endl;
 }
