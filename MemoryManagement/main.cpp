@@ -1,5 +1,6 @@
 #include "pointer.h"
 #include "structure.h"
+#include "raii.h"
 
 int main() {
 	// 포인터 기본 개념
@@ -7,8 +8,11 @@ int main() {
 	// 포인터 사용 시 주의사항
 	// pointerWarnings();
 	// 포인터 유형
-	//typeofPointer();
+	// typeofPointer();
 
 	// 메모리 구조
-	basicStructure();
+	// basicStructure();
+
+	// RAII
+	raiiExample();
 }

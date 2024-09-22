@@ -21,10 +21,12 @@
   <ItemGroup>
     <ClCompile Include="main.cpp" />
     <ClCompile Include="pointer.cpp" />
+    <ClCompile Include="raii.cpp" />
     <ClCompile Include="structure.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pointer.h" />
+    <ClInclude Include="raii.h" />
     <ClInclude Include="structure.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
