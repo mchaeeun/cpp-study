@@ -1,4 +1,5 @@
 #include <iostream>
+#include "macros.h"
 using namespace std;
 // 매크로 정의
 #define PI 3.14159 // 매크로: 전처리기에 의해 치환됨
@@ -50,6 +51,7 @@ void constantExample() {
 }
 
 int main() {
-	constantExample();
+	// constantExample();
+	macroBasic();
 	return 0;
 }
