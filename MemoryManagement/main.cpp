@@ -12,12 +12,12 @@ int main() {
 	// typeofPointer();
 
 	// 메모리 구조
-	// basicStructure();
+	basicStructure();
 
 	// RAII
 	// raiiExample();
 
 	// 스마트 포인터
-	uniquePointerExample();
-	sharedPointerExample();
+	// uniquePointerExample();
+	// sharedPointerExample();
 }

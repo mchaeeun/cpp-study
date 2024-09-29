@@ -1,6 +1,9 @@
 #include "structure.h"
 
 void heapAllocationExample(int count) {
+	// 0이하일 때 예외 처리
+	if (count <= 0) { cout << "입력값은 0보다 커야합니다." << endl; return; }
+
 	int* heapVar = new int[count];  // 힙에 동적 메모리 할당
 	for (int i = 0; i < count; i++) {
 		heapVar[i] = i;
@@ -48,7 +51,10 @@ void basicStructure() {
 	// 힙 영역은 메모리 주소가 낮은 곳에서 높은 곳으로 할당됨
 	// 힙 영역은 메모리 누수(Memory Leak)와 프로그램 성능 저하의 원인이 될 수 있음
 	cout << "힙 예제" << endl;
-	heapAllocationExample(5);
+	cout << "할당할 배열 크기를 입력하시오: ";
+	int arrSize;
+	cin >> arrSize;
+	heapAllocationExample(arrSize);
 
 	// 4. 스택 영역
 	// 지역 변수, 매개변수, 리턴 주소 등이 저장되는 영역
