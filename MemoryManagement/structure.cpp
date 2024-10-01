@@ -1,7 +1,13 @@
 #include "structure.h"
+#include <cstddef>
 
 void heapAllocationExample(int count) {
 	// 0이하일 때 예외 처리
+	// 방법 1: 매개변수 unsigned int 사용
+	// 음수를 unsigned 타입에 맞게 양수로 자동 변환
+	// 방법 2: 매개변수 size_t 사용
+	// 음수를 size_t 타입에 맞게 양수로 자동 변환
+	// 방법 3: if문 사용
 	if (count <= 0) { cout << "입력값은 0보다 커야합니다." << endl; return; }
 
 	int* heapVar = new int[count];  // 힙에 동적 메모리 할당

@@ -1,5 +1,5 @@
 #include <iostream>
-#include "macros.h"
+#include "main.h"
 // 릴리즈 빌드에서 assert 자동 제거
 #define NDEBUG
 #include <cassert>
