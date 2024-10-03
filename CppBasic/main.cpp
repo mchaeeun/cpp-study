@@ -50,9 +50,43 @@ void constantExample() {
 	// constexpr int d = sumTwoIntegers(num3, num4); // 컴파일 에러
 }
 
+// 람다 표현식: 코드 내에서 함수 객체를 즉석에서 만들고 전달할 수 있는 기능
+void lambdaExample() {
+	// 람다 함수는 자체적인 타입(익명 타입: 컴파일 전 알 수 없음)을 갖고 있으므로
+	// auto 또는 함수 포인터로 정의하는 것이 일반적
+	// auto 또한 컴파일 타임에서 자동으로 타입이 할당됨
+	auto add = [](int a, int b) -> int {
+		return a + b;
+		};
+	cout << "3 + 4 = " << add(3, 4) << endl;
+
+	// 반환형이 return 타입과 달라도 오류 안 뜸. 
+	// return 타입을 명시적 반환형으로 변환
+	auto add2 = [](int a, int b) -> bool {
+		return a + b;
+		};
+
+	// 캡처: 외부 변수 사용 가능
+	int x = 1; int y = 2;
+	// [x, y] 값 캡처
+	// -> [반환형] 생략 가능
+	auto mul = [x, y]() {
+		// x += 1; // 오류: 캡처한 변수 수정 불가능
+		return x * y;
+		};
+	cout << "1 * 2 = " << mul() << endl;
+
+	// mutable 람다: 캡처한 변수 수정 가능
+	auto lambda = [x]() mutable {
+		return x++;
+		};
+
+}
+
 int main() {
 	// constantExample();
 	// macroBasic();
-	cstddefExample();
+	// cstddefExample();
+	lambdaExample();
 	return 0;
 }
